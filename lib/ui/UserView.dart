@@ -42,6 +42,7 @@ class UserView extends GetView<UserController> {
           },
         ),
       ],)),
+      floatingActionButton: FloatingActionButton(onPressed: (){showBottomSheet();}, backgroundColor: Colors.red, child: const Icon(Icons.add, color: Colors.white)),
       body: Obx(() {
           switch (controller.state.value) {
             case UserState.loading: return const Center(child: CircularProgressIndicator(color: Colors.grey));
@@ -61,5 +62,44 @@ class UserView extends GetView<UserController> {
         },
       ),
     );
+  }
+
+
+  void showBottomSheet() {
+    Get.bottomSheet(
+      Container(
+        decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0))
+        ),
+        child: Wrap(
+          children: <Widget>[
+            ListTile(
+              leading: Icon(Icons.music_note),
+              title: Text('Music'),
+              onTap: () => Get.back(result: 'Music'),
+            ),
+            ListTile(
+              leading: Icon(Icons.photo),
+              title: Text('Photo'),
+              onTap: () => Get.back(result: 'Photo'),
+            ),
+            ListTile(
+              leading: Icon(Icons.videocam),
+              title: Text('Video'),
+              onTap: () => Get.back(result: 'Video'),
+            ),
+          ],
+        ),
+      ),
+      isDismissible: true,
+      enableDrag: true,
+      backgroundColor: Colors.transparent,
+    ).then((value) {
+      // Handle bottom sheet result
+      if(value != null) {
+        print('Selected: $value');
+      }
+    });
   }
 }
