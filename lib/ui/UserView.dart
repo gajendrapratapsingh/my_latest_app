@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:myapp/controllers/UserController.dart';
 import 'package:myapp/models/User.dart';
+import 'package:myapp/ui/MyView.dart';
+import 'package:myapp/utils/routes/routes.dart';
 
 class UserView extends GetView<UserController> {
-
-  //final UserController controller = Get.put(UserController());
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -18,7 +19,10 @@ class UserView extends GetView<UserController> {
         backgroundColor: Colors.red,
         leading: IconButton(onPressed: (){
           _scaffoldKey.currentState!.openDrawer();
-        }, icon: const Icon(Icons.menu, color: Colors.white)),
+        }, icon: const FaIcon(FontAwesomeIcons.navicon, color: Colors.white)),
+        actions: [
+          IconButton(onPressed: (){}, icon: const FaIcon(FontAwesomeIcons.asterisk, color: Colors.white))
+        ],
       ),
       drawer: Drawer(backgroundColor: Colors.white, elevation: 0, child: ListView(padding: EdgeInsets.zero, children: [
         const DrawerHeader(
@@ -51,9 +55,16 @@ class UserView extends GetView<UserController> {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   User user = controller.users[index];
-                  return ListTile(
-                    title: Text(user.name),
-                    subtitle: Text(user.email),
+                  return GestureDetector(
+                    onTap: () {
+                      //Get.to(const MyView());
+                      //Get.offAndToNamed(Routes.otpScreen, arguments: loginResponse[0].mobile.toString());
+                      Get.toNamed(Routes.myScreen);
+                    },
+                    child: ListTile(
+                      title: Text(user.name),
+                      subtitle: Text(user.email),
+                    ),
                   );
                 },
               );

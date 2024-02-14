@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapp/ui/MyView.dart';
 import 'package:myapp/ui/UserView.dart';
+import 'package:myapp/utils/routes/pages.dart';
+import 'package:myapp/utils/routes/routes.dart';
 
 import 'binding/MyBinding.dart';
 
@@ -22,6 +24,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: 'SpecialsBirthday',
       ),
+      getPages: Pages.list,
+      initialRoute: Routes.userScreen,
       initialBinding: MyBinding(),
       home: UserView(),
     );

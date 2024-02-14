@@ -6,9 +6,10 @@ import 'package:myapp/services/UserService.dart';
 class MyBinding implements Bindings {
   @override
   void dependencies() {
-    //Get.lazyPut<MyController>(() => MyController());
-    Get.put(UserService());
+    //Get.put(UserService());
     Get.lazyPut<UserController>(() => UserController());
-    Get.lazyPut<UserService>(() => UserService());
+    //Get.lazyPut<MyController>(() => MyController());
+    Get.put(MyController());
+    //Get.lazyPut<UserService>(() => UserService());
   }
 }
