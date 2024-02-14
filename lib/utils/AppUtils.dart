@@ -10,7 +10,7 @@ class AppUtils{
          message: value,
          messageColor: Colors.white,
          forwardAnimationCurve: Curves.decelerate,
-         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
          padding: const EdgeInsets.all(15),
          titleColor: Colors.white,
          borderRadius: BorderRadius.circular(10),

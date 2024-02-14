@@ -68,12 +68,16 @@ class MyView extends GetView<MyController> {
             mainAxisSize: MainAxisSize.min,
             children: [
               GestureDetector(onTap: (){
-                if(controller.count == 0){
-                  AppUtils.showWarning(context, "Count value already is 0");
-                }
-                else{
-                  controller.decrement();
-                }}, child: Container(height: 45, width: 80, alignment: Alignment.center, decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(8.0)), child: Icon(FontAwesomeIcons.minus, color: Colors.white))),
+                  if(controller.tabEnabled.isTrue){
+                    if(controller.count == 0){
+                      controller.disableTab();
+                      AppUtils.showWarning(context, "Count value already is 0");
+                    }
+                    else{
+                      controller.decrement();
+                    }
+                  }
+                }, child: Container(height: 45, width: 80, alignment: Alignment.center, decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(8.0)), child: Icon(FontAwesomeIcons.minus, color: Colors.white))),
               const SizedBox(width: 30),
               GestureDetector(onTap: (){controller.increment();}, child: Container(height: 45, width: 80, decoration: BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(8.0)), child: Icon(FontAwesomeIcons.plus, color: Colors.white)))
             ],
