@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myapp/ui/MyView.dart';
 import 'package:myapp/ui/UserView.dart';
 import 'package:myapp/utils/routes/pages.dart';
 import 'package:myapp/utils/routes/routes.dart';
-
 import 'binding/MyBinding.dart';
 
 void main() {
@@ -22,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
         useMaterial3: true,
-        fontFamily: 'SpecialsBirthday',
+        fontFamily: 'Poppins',
       ),
       getPages: Pages.list,
       initialRoute: Routes.userScreen,

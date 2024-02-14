@@ -25,11 +25,20 @@ class UserView extends GetView<UserController> {
         ],
       ),
       drawer: Drawer(backgroundColor: Colors.white, elevation: 0, child: ListView(padding: EdgeInsets.zero, children: [
-        const DrawerHeader(
-          decoration: BoxDecoration(
+        DrawerHeader(
+          decoration: const BoxDecoration(
             color: Colors.red,
           ),
-          child: Text('Drawer Header'),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(height: 65, width: 65, decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.0)), child: ClipOval(child: Image.asset('assets/images/user.png', fit: BoxFit.cover))),
+              const SizedBox(height: 5.0),
+              const Text("Gajendra Pratap Singh", style: TextStyle(color: Colors.white)),
+              Text("gajendraptsingh05@gmail.com".toLowerCase(), style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w300))
+            ],
+          ),
         ),
         ListTile(
           leading: const Icon(Icons.settings, color: Colors.red), // Change color here

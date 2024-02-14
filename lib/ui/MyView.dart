@@ -1,7 +1,9 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:myapp/controllers/MyController.dart';
+import 'package:myapp/utils/AppUtils.dart';
 
 
 class MyView extends GetView<MyController> {
@@ -34,7 +36,7 @@ class MyView extends GetView<MyController> {
                 constraints: BoxConstraints(maxWidth: double.infinity, maxHeight: Get.height/2)
 
               ),
-              items: const ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada', "India", "Pakistan", "SriLanka", "UK", "Bangladesh"],
+              items: const ["Brazil", "Italia", "Tunisia", 'Canada', "India", "Pakistan", "SriLanka", "UK", "Bangladesh"],
               dropdownDecoratorProps: DropDownDecoratorProps(
                 dropdownSearchDecoration: InputDecoration(
                   labelText: "Country Name",
@@ -52,22 +54,37 @@ class MyView extends GetView<MyController> {
           ),
           const SizedBox(height: 5.0),
           const Text(
-            'You have pushed the button this many times:',
+            'Count Value:',
             textAlign: TextAlign.center,
           ),
           Obx(() => Text(
               '${controller.count}',
               style: const TextStyle(fontSize: 24),
               textAlign: TextAlign.center,
-            ),
-          ),
+            )),
+          const SizedBox(height: 10.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              GestureDetector(onTap: (){
+                if(controller.count == 0){
+                  AppUtils.showWarning(context, "Count value already is 0");
+                }
+                else{
+                  controller.decrement();
+                }}, child: Container(height: 45, width: 80, alignment: Alignment.center, decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(8.0)), child: Icon(FontAwesomeIcons.minus, color: Colors.white))),
+              const SizedBox(width: 30),
+              GestureDetector(onTap: (){controller.increment();}, child: Container(height: 45, width: 80, decoration: BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(8.0)), child: Icon(FontAwesomeIcons.plus, color: Colors.white)))
+            ],
+          )
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: controller.increment,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: controller.increment,
+      //   tooltip: 'Increment',
+      //   child: const Icon(Icons.add),
+      // ),
     );
   }
 }
