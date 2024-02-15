@@ -40,6 +40,8 @@ dependencies:
   dropdown_search: ^5.0.6
   font_awesome_flutter: ^10.7.0
   another_flushbar: ^1.10.29
+  flutter_screenutil: ^5.9.0
+  google_fonts: ^6.1.0
 
 dev_dependencies:
   flutter_test:

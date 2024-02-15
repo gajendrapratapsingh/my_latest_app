@@ -2,6 +2,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:myapp/common/app_bar.dart';
 import 'package:myapp/controllers/MyController.dart';
 import 'package:myapp/utils/AppUtils.dart';
 
@@ -12,18 +13,7 @@ class MyView extends GetView<MyController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('My App', style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.red,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white), // Change the icon here
-          onPressed: () {
-            // Add your back button logic here
-            //Navigator.pop(context);
-            Get.back();
-          },
-        ),
-      ),
+      appBar: buildAppBar(context, "My App"),
       body: Column(
         children: [
           Padding(

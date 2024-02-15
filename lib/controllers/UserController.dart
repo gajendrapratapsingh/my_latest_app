@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:myapp/api/ApiProvider.dart';
 import 'package:myapp/models/User.dart';
-import 'package:myapp/services/UserService.dart';
 
 enum UserState { loading, success, failure }
 

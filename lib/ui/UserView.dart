@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:myapp/controllers/UserController.dart';
 import 'package:myapp/models/User.dart';
+import 'package:myapp/theme/colors.dart';
 import 'package:myapp/ui/MyView.dart';
 import 'package:myapp/utils/routes/routes.dart';
 
@@ -16,7 +17,7 @@ class UserView extends GetView<UserController> {
       key: _scaffoldKey,
       appBar: AppBar(
         title: const Text('My App', style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.red,
+        backgroundColor: AppColors.kAppBarColor,
         leading: IconButton(onPressed: (){
           _scaffoldKey.currentState!.openDrawer();
         }, icon: const FaIcon(FontAwesomeIcons.navicon, color: Colors.white)),
@@ -27,13 +28,13 @@ class UserView extends GetView<UserController> {
       drawer: Drawer(backgroundColor: Colors.white, elevation: 0, child: ListView(padding: EdgeInsets.zero, children: [
         DrawerHeader(
           decoration: const BoxDecoration(
-            color: Colors.red,
+            color: AppColors.kAppBarColor,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(height: 65, width: 65, decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.0)), child: ClipOval(child: Image.asset('assets/images/user.png', fit: BoxFit.cover))),
+              Container(height: 65, width: 65, decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.0)), child: ClipOval(child: Image.asset('assets/images/person.png', fit: BoxFit.cover))),
               const SizedBox(height: 5.0),
               const Text("Gajendra Pratap Singh", style: TextStyle(color: Colors.white)),
               Text("gajendraptsingh05@gmail.com".toLowerCase(), style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w300))
@@ -55,7 +56,7 @@ class UserView extends GetView<UserController> {
           },
         ),
       ],)),
-      floatingActionButton: FloatingActionButton(onPressed: (){showBottomSheet();}, backgroundColor: Colors.red, child: const Icon(Icons.add, color: Colors.white)),
+      floatingActionButton: FloatingActionButton(onPressed: (){showBottomSheet();}, backgroundColor: AppColors.kAppBarColor, child: const Icon(Icons.add, color: Colors.white)),
       body: Obx(() {
           switch (controller.state.value) {
             case UserState.loading: return const Center(child: CircularProgressIndicator(color: Colors.grey));
@@ -95,18 +96,18 @@ class UserView extends GetView<UserController> {
         child: Wrap(
           children: <Widget>[
             ListTile(
-              leading: Icon(Icons.music_note),
-              title: Text('Music'),
+              leading: const Icon(Icons.music_note),
+              title: const Text('Music'),
               onTap: () => Get.back(result: 'Music'),
             ),
             ListTile(
-              leading: Icon(Icons.photo),
-              title: Text('Photo'),
+              leading: const Icon(Icons.photo),
+              title: const Text('Photo'),
               onTap: () => Get.back(result: 'Photo'),
             ),
             ListTile(
-              leading: Icon(Icons.videocam),
-              title: Text('Video'),
+              leading: const Icon(Icons.videocam),
+              title: const Text('Video'),
               onTap: () => Get.back(result: 'Video'),
             ),
           ],
