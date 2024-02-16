@@ -1,10 +1,14 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:myapp/theme/colors.dart';
 
 class AppUtils{
 
    static const String baseurl = "https://jsonplaceholder.typicode.com/";
+
+   static formatPrice(double price) => '\$ ${price.toStringAsFixed(2)}';
+   static formatDate(DateTime date) => DateFormat.yMd().format(date);
 
    static void showWarning(BuildContext context, String value) {
       Flushbar(
