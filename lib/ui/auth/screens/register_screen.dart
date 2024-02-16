@@ -50,7 +50,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       backgroundColor: AppColors.kBackgroundColor,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+          padding: EdgeInsets.symmetric(horizontal: 15.w),
           child: Form(
             key: _formKey,
             child: Column(
