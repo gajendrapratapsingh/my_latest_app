@@ -33,9 +33,9 @@ class UserView extends GetView<UserController> {
           leading: IconButton(onPressed: (){
             _scaffoldKey.currentState!.openDrawer();
           }, icon: const FaIcon(FontAwesomeIcons.navicon, color: Colors.white)),
-          actions: [
-            IconButton(onPressed: (){}, icon: const FaIcon(FontAwesomeIcons.asterisk, color: Colors.white))
-          ],
+          // actions: [
+          //   IconButton(onPressed: (){}, icon: const FaIcon(FontAwesomeIcons.asterisk, color: Colors.white))
+          // ],
         ),
         drawer: Drawer(backgroundColor: Colors.white, elevation: 0, child: ListView(padding: EdgeInsets.zero, children: [
           DrawerHeader(
