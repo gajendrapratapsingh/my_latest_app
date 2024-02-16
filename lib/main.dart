@@ -1,13 +1,23 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import 'package:myapp/db/MyAppDB.dart';
+import 'package:myapp/models/Person.dart';
 import 'package:myapp/ui/UserView.dart';
 import 'package:myapp/ui/auth/screens/login_screen.dart';
 import 'package:myapp/utils/routes/pages.dart';
 import 'package:myapp/utils/routes/routes.dart';
+import 'package:path_provider/path_provider.dart';
 import 'binding/MyBinding.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  final appDocumentDirectory = await getApplicationDocumentsDirectory();
+  Hive.init(appDocumentDirectory.path);
+  await Hive.openBox('myAppBox');
   runApp(const MyApp());
 }
 
@@ -35,7 +45,7 @@ class MyApp extends StatelessWidget {
           getPages: Pages.list,
           initialRoute: Routes.loginScreen,
           initialBinding: MyBinding(),
-          home: LoginScreen(),
+          home: const LoginScreen(),
         );
       },
     );
