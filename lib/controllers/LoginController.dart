@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:myapp/api/ApiProvider.dart';
 import 'package:myapp/utils/AppUtils.dart';
 import 'package:myapp/utils/routes/routes.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 enum LoginState {Idle, Busy, Finished, NoData, FinishedWithError}
 
@@ -42,14 +43,17 @@ class LoginController extends GetxController {
 
   void login(String username, String password, BuildContext context) async{
     _loginState.value = LoginState.Busy;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     var resp = _apiProvider.loginUser(username, password);
     resp.then((value){
       if(value == null){
+        prefs.setBool('islogin', false);
         _loginState.value = LoginState.FinishedWithError;
         AppUtils.showWarning(context, "Wrong credentials!!");
       }
       else{
         print("login resp $value");
+        prefs.setBool('islogin', true);
         myAppBox?.put('username', '${value['firstName']} ${value['lastName']}');
         myAppBox?.put('email', value['email']);
         myAppBox?.put('picture', value['image']);

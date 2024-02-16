@@ -38,9 +38,9 @@ class MyApp extends StatelessWidget {
           // ),
           theme: ThemeData(),
           getPages: Pages.list,
-          initialRoute: Routes.loginScreen,
+          initialRoute: Routes.splashScreen,
           initialBinding: MyBinding(),
-          home: const LoginScreen(),
+          //home: const LoginScreen(),
         );
       },
     );

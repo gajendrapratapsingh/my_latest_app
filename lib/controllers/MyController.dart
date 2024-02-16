@@ -128,7 +128,7 @@ class MyController extends GetxController {
 
     PdfApi.openFile(pdfFile).then((pdfResult){
        if(pdfResult == "done"){
-         _pdfGenerateState.value = PdfGenerateState.Finished;
+         _pdfGenerateState.value = PdfGenerateState.Busy;
        }
        else{
          _pdfGenerateState.value = PdfGenerateState.FinishedWithError;
