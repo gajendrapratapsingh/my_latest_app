@@ -1,12 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-import 'package:myapp/db/MyAppDB.dart';
-import 'package:myapp/models/Person.dart';
-import 'package:myapp/ui/UserView.dart';
 import 'package:myapp/ui/auth/screens/login_screen.dart';
 import 'package:myapp/utils/routes/pages.dart';
 import 'package:myapp/utils/routes/routes.dart';
