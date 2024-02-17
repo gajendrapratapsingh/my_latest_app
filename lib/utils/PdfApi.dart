@@ -1,9 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
 import 'package:myapp/utils/AppUtils.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
@@ -47,14 +43,15 @@ class PdfApi {
     return fileList;
   }
 
-  static void deleteFile(BuildContext context, String name) async{
+  static Future<bool> deleteFile(String name) async{
     try{
       final dir = await getApplicationDocumentsDirectory();
       final file = File('${dir.path}/$name');
       file.deleteSync();
+      return true;
     }
     catch(e){
-       AppUtils.showToastMessage("File not found");
+       return false;
     }
   }
 }

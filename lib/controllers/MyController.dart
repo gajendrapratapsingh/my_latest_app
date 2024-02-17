@@ -13,12 +13,17 @@ import 'package:myapp/utils/pdf_invoice_api.dart';
 
 enum PdfGenerateState {Idle, Busy, Finished, FinishedWithError}
 
+enum PdfDataState {Idle, Busy, NoData, Finished, FinishedWithError}
+
 class MyController extends GetxController {
   var count = 0.obs;
 
   var tabEnabled = true.obs;
 
   final fileList = <File>[].obs;
+
+  final _pdfDataState = PdfDataState.Idle.obs;
+  PdfDataState get pdfDataState => _pdfDataState.value;
 
   @override
   void onInit() {
@@ -37,32 +42,37 @@ class MyController extends GetxController {
     });
   }
 
-  void increment() {
-    count.value++;
-  }
+  void deletePdfFile(String file) async{
+      PdfApi.deleteFile(file).then((deleteResp){
+         if(deleteResp){
+           AppUtils.showToastMessage("File Deleted Successfully!!");
+           fetchFiles();
+         }
+         else{
+           AppUtils.showToastMessage("File not found");
+         }
+      });
 
-  void decrement() {
-    count.value--;
-
-  }
-
-
-  void deletePdfFile(BuildContext context, String file) async{
-   PdfApi.deleteFile(context, file);
   }
 
   Future<void> fetchFiles() async {
+    _pdfDataState.value = PdfDataState.Busy;
     try {
       Future<List<File>> data = PdfApi.getAllFilesFromDirectory();
-      data.then((value) => fileList.assignAll(value));
+      data.then((value){
+        if(value.isEmpty){
+          _pdfDataState.value = PdfDataState.NoData;
+        }
+        else{
+          fileList.assignAll(value);
+          _pdfDataState.value = PdfDataState.Finished;
+        }
+      });
+
     } catch (e) {
+      _pdfDataState.value = PdfDataState.FinishedWithError;
       print("Error fetching files: $e");
     }
-  }
-
-  void getPdfFile(){
-    Future<List<File>> data = PdfApi.getAllFilesFromDirectory();
-    data.then((value) => AppUtils.showToastMessage("Number of files : ${value.length}"));
   }
 
   void generatePdf(BuildContext context) async{
@@ -186,6 +196,7 @@ class MyController extends GetxController {
     PdfApi.openFile(pdfFile).then((pdfResult){
        if(pdfResult.message == "done"){
          _pdfGenerateState.value = PdfGenerateState.Finished;
+         fetchFiles();
        }
        else{
          _pdfGenerateState.value = PdfGenerateState.FinishedWithError;

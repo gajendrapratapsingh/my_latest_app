@@ -98,7 +98,7 @@ class UserView extends GetView<UserController> {
                     );
                   },
                 );
-                case UserState.failure: return Center(child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              case UserState.failure: return Center(child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Image.asset('assets/images/no_data.png', height: 80, width: 80, fit: BoxFit.cover),
                   const SizedBox(height: 5.0),
                   const Text("Data not found")

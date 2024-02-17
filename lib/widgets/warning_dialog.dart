@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:myapp/controllers/MyController.dart';
+import 'package:myapp/theme/colors.dart';
+import 'package:myapp/utils/PdfApi.dart';
 
 
 class WarningDialog extends StatefulWidget {
-  final String version;
+  final String file;
   final String description;
-  final String appLink;
   final bool allowDismissal;
 
   const WarningDialog({Key? key,
-    this.version = " ",
+    required this.file,
     required this.description,
-    required this.appLink,
     required this.allowDismissal
   }) : super(key: key);
 
@@ -33,8 +35,8 @@ class _WarningDialogState extends State<WarningDialog> {
 
   @override
   Widget build(BuildContext context) {
-    screenHeight = MediaQuery.of(context).size.height;
-    screenWidth = MediaQuery.of(context).size.width;
+    screenHeight = Get.height;
+    screenWidth = Get.width;
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 500),
@@ -62,7 +64,7 @@ class _WarningDialogState extends State<WarningDialog> {
               topRight: Radius.circular(20),
               topLeft: Radius.circular(20),
             ),
-            color: Colors.indigo,
+            color: AppColors.kAppBarColor,
           ),
           child: const Center(
             child: Icon(
@@ -73,7 +75,7 @@ class _WarningDialogState extends State<WarningDialog> {
           ),
         ),
         Container(
-          height: screenHeight / 4,
+          height: screenHeight / 5.5,
           width: screenWidth / 1.4,
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
@@ -110,7 +112,7 @@ class _WarningDialogState extends State<WarningDialog> {
                           Align(
                             alignment: Alignment.centerRight,
                             child: Text(
-                              widget.version,
+                              "My App",
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
@@ -141,15 +143,15 @@ class _WarningDialogState extends State<WarningDialog> {
                             width: 120,
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: Colors.indigo,
+                                color: AppColors.kAppBarColor,
                               ),
                               borderRadius: BorderRadius.circular(50),
                             ),
                             child: const Center(
                               child: Text(
-                                "LATER",
+                                "No",
                                 style: TextStyle(
-                                  color: Colors.indigo,
+                                  color: AppColors.kAppBarColor,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -161,17 +163,19 @@ class _WarningDialogState extends State<WarningDialog> {
                       Expanded(
                         child: GestureDetector(
                           onTap: () async {
-                            //IRUDMConstants.launchURL(widget.appLink);
+                            Get.find<MyController>().deletePdfFile(widget.file);
+                            //PdfApi.deleteFile(widget.file);
+                            Navigator.pop(context);
                           },
                           child: Container(
                             height: 30,
                             width: 120,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(50),
-                              color: Colors.indigo,
+                              color: AppColors.kAppBarColor,
                               boxShadow: const [
                                 BoxShadow(
-                                  color: Colors.indigo,
+                                  color: AppColors.kAppBarColor,
                                   blurRadius: 10,
                                   offset: Offset(2, 2),
                                 ),
@@ -179,7 +183,7 @@ class _WarningDialogState extends State<WarningDialog> {
                             ),
                             child: const Center(
                               child: Text(
-                                "UPDATE",
+                                "Delete",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
