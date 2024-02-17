@@ -101,7 +101,7 @@ class _WarningDialogState extends State<WarningDialog> {
                           const Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              "ABOUT UPDATE",
+                              "Confirmation!!",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
