@@ -10,7 +10,7 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
 
 class PdfInvoiceApi {
-  static Future<File> generate(Invoice invoice) async {
+  static Future<File> generate(Invoice invoice, String month) async {
     final pdf = Document();
 
     pdf.addPage(MultiPage(
@@ -25,7 +25,7 @@ class PdfInvoiceApi {
       footer: (context) => buildFooter(invoice),
     ));
 
-    return PdfApi.saveDocument(name: 'my_invoice.pdf', pdf: pdf);
+    return PdfApi.saveDocument(name: '${invoice.customer.name}_invoice_${month.toLowerCase()}.pdf', pdf: pdf);
   }
 
   static Widget buildHeader(Invoice invoice) => Column(

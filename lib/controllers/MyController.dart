@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:myapp/models/customer.dart';
 import 'package:myapp/models/invoice.dart';
 import 'package:myapp/models/supplier.dart';
@@ -15,6 +17,14 @@ class MyController extends GetxController {
   var count = 0.obs;
 
   var tabEnabled = true.obs;
+
+  final fileList = <File>[].obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    fetchFiles();
+  }
 
   final _pdfGenerateState = PdfGenerateState.Idle.obs;
   PdfGenerateState get pdfGenerateState => _pdfGenerateState.value;
@@ -33,8 +43,27 @@ class MyController extends GetxController {
 
   void decrement() {
     count.value--;
+
   }
 
+
+  void deletePdfFile(BuildContext context, String file) async{
+   PdfApi.deleteFile(context, file);
+  }
+
+  Future<void> fetchFiles() async {
+    try {
+      Future<List<File>> data = PdfApi.getAllFilesFromDirectory();
+      data.then((value) => fileList.assignAll(value));
+    } catch (e) {
+      print("Error fetching files: $e");
+    }
+  }
+
+  void getPdfFile(){
+    Future<List<File>> data = PdfApi.getAllFilesFromDirectory();
+    data.then((value) => AppUtils.showToastMessage("Number of files : ${value.length}"));
+  }
 
   void generatePdf(BuildContext context) async{
     _pdfGenerateState.value = PdfGenerateState.Busy;
@@ -121,14 +150,42 @@ class MyController extends GetxController {
           vat: 0.19,
           unitPrice: 0.99,
         ),
+        InvoiceItem(
+          description: 'Blue Berries',
+          date: DateTime.now(),
+          quantity: 5,
+          vat: 0.19,
+          unitPrice: 0.99,
+        ),
+        InvoiceItem(
+          description: 'Blue Berries',
+          date: DateTime.now(),
+          quantity: 5,
+          vat: 0.19,
+          unitPrice: 0.99,
+        ),
+        InvoiceItem(
+          description: 'Blue Berries',
+          date: DateTime.now(),
+          quantity: 5,
+          vat: 0.19,
+          unitPrice: 0.99,
+        ),
+        InvoiceItem(
+          description: 'Blue Berries',
+          date: DateTime.now(),
+          quantity: 5,
+          vat: 0.19,
+          unitPrice: 0.99,
+        ),
       ],
     );
 
-    final pdfFile = await PdfInvoiceApi.generate(invoice);
+    final pdfFile = await PdfInvoiceApi.generate(invoice, DateFormat('MMMM').format(date));
 
     PdfApi.openFile(pdfFile).then((pdfResult){
-       if(pdfResult == "done"){
-         _pdfGenerateState.value = PdfGenerateState.Busy;
+       if(pdfResult.message == "done"){
+         _pdfGenerateState.value = PdfGenerateState.Finished;
        }
        else{
          _pdfGenerateState.value = PdfGenerateState.FinishedWithError;
