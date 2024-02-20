@@ -1,16 +1,13 @@
 import 'dart:io';
-
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:myapp/common/app_bar.dart';
 import 'package:myapp/controllers/MyController.dart';
 import 'package:myapp/theme/colors.dart';
-import 'package:myapp/utils/AppUtils.dart';
 import 'package:myapp/utils/PdfApi.dart';
-import 'package:myapp/widgets/button_widget.dart';
+
 import 'package:myapp/widgets/warning_dialog.dart';
+import 'package:share_plus/share_plus.dart';
 
 class MyView extends GetView<MyController> {
   const MyView({super.key});
@@ -19,14 +16,15 @@ class MyView extends GetView<MyController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context, "My App"),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
           onPressed: () async {
             controller.generatePdf(context);
           },
+          icon: Icon(Icons.add),
+          label: Text('Create Invoice'),
           backgroundColor: AppColors.kAppBarColor,
-          child: Text("Create Invoice", style: TextStyle(
-            color: Colors.white
-          ))),
+          foregroundColor: Colors.white,
+      ),
       body: SafeArea(
         child: Stack(
           children: [
@@ -34,16 +32,11 @@ class MyView extends GetView<MyController> {
               children: [
                 Expanded(child: Obx(() {
                   switch (controller.pdfDataState) {
-                    case PdfDataState.Busy:
-                      return const Center(
+                    case PdfDataState.Busy:return const Center(
                           child: CircularProgressIndicator(
                               color: AppColors.kAppBarColor));
-                    case PdfDataState.Idle:
-                      return const Center(
-                          child: CircularProgressIndicator(
-                              color: AppColors.kAppBarColor));
-                    case PdfDataState.Finished:
-                      return GridView.builder(
+                    case PdfDataState.Idle:return const Center(child: CircularProgressIndicator(color: AppColors.kAppBarColor));
+                    case PdfDataState.Finished:return GridView.builder(
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
@@ -114,8 +107,7 @@ class MyView extends GetView<MyController> {
                                               color: AppColors.kAppBarColor,
                                               borderRadius: BorderRadius.only(
                                                   topLeft: Radius.circular(5.0),
-                                                  bottomRight:
-                                                      Radius.circular(5.0)),
+                                                  bottomRight: Radius.circular(5.0)),
                                             ),
                                             child: const Icon(
                                                 Icons.delete_rounded,
@@ -130,8 +122,12 @@ class MyView extends GetView<MyController> {
                                         padding: const EdgeInsets.only(
                                             bottom: 2.0, right: 2.0),
                                         child: InkWell(
-                                          onTap: () {
-                                            // Share from here
+                                          onTap: () async{
+                                            print("File path ${file.path}");
+                                            final result = Share.shareXFiles([XFile(file.path)], text: 'Invoice Pdf');
+                                            //final result = await Share.shareXFiles([XFile('${file.path}')], text: 'Invoice Pdf');
+                                            result.then((value) => print("Result ${value.status.toString()}"));
+
                                           },
                                           child: Container(
                                             height: 32,
@@ -139,9 +135,7 @@ class MyView extends GetView<MyController> {
                                             decoration: const BoxDecoration(
                                               color: AppColors.kAppBarColor,
                                               borderRadius: BorderRadius.only(
-                                                  topLeft: Radius.circular(5.0),
-                                                  bottomRight:
-                                                  Radius.circular(5.0)),
+                                                  topRight: Radius.circular(5.0)),
                                             ),
                                             child: const Icon(
                                                 Icons.share,
@@ -155,8 +149,7 @@ class MyView extends GetView<MyController> {
                           );
                         },
                       );
-                    case PdfDataState.FinishedWithError:
-                      return Center(
+                    case PdfDataState.FinishedWithError:return Center(
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -174,18 +167,12 @@ class MyView extends GetView<MyController> {
                               const SizedBox(height: 5.0),
                               const Text("Data not found")
                             ]));
-                      // TODO: Handle this case.
                   }
                 }))
               ],
             ),
             Obx(() => controller.pdfGenerateState == PdfGenerateState.Busy
-                ? const Center(
-                    child: SizedBox(
-                        height: 32,
-                        width: 32,
-                        child: CircularProgressIndicator(
-                            color: AppColors.kGreenColor, strokeWidth: 2.0)))
+                ? const Center(child: SizedBox(height: 32, width: 32, child: CircularProgressIndicator(color: AppColors.kGreenColor, strokeWidth: 2.0)))
                 : const SizedBox())
           ],
         ),

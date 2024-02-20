@@ -22,6 +22,8 @@ class PdfApi {
   static Future<OpenResult> openFile(File file) async {
     final url = file.path;
 
+    print("open ${file.path}");
+
     var result = await OpenFilex.open(url);
     return result;
   }
