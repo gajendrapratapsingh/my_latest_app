@@ -75,7 +75,7 @@ class _WarningDialogState extends State<WarningDialog> {
           ),
         ),
         Container(
-          height: screenHeight / 5.0,
+          height: screenHeight / 4.0,
           width: screenWidth / 1.4,
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(

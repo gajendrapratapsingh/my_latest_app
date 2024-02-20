@@ -75,7 +75,7 @@ class MyController extends GetxController {
     }
   }
 
-  void generatePdf(BuildContext context) async{
+  void generatePdf(String customerName, String customerAddress) async{
     _pdfGenerateState.value = PdfGenerateState.Busy;
     final date = DateTime.now();
     final dueDate = date.add(const Duration(days: 7));
@@ -86,9 +86,9 @@ class MyController extends GetxController {
         address: 'Sarah Street 9, Beijing, China',
         paymentInfo: 'https://paypal.me/sarahfieldzz',
       ),
-      customer: const Customer(
-        name: 'Apple Inc.',
-        address: 'Apple Street, Cupertino, CA 95014',
+      customer: Customer(
+        name: customerName,
+        address: customerAddress,
       ),
       info: InvoiceInfo(
         date: date,
@@ -200,7 +200,7 @@ class MyController extends GetxController {
        }
        else{
          _pdfGenerateState.value = PdfGenerateState.FinishedWithError;
-         AppUtils.showWarning(context, pdfResult.message);
+         //AppUtils.showWarning(context, pdfResult.message);
        }
     });
   }

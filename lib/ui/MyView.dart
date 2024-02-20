@@ -5,6 +5,7 @@ import 'package:myapp/common/app_bar.dart';
 import 'package:myapp/controllers/MyController.dart';
 import 'package:myapp/theme/colors.dart';
 import 'package:myapp/utils/PdfApi.dart';
+import 'package:myapp/widgets/invoice_dialog.dart';
 
 import 'package:myapp/widgets/warning_dialog.dart';
 import 'package:share_plus/share_plus.dart';
@@ -18,7 +19,7 @@ class MyView extends GetView<MyController> {
       appBar: buildAppBar(context, "My App"),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () async {
-            controller.generatePdf(context);
+            Get.dialog(InvoiceDialog());
           },
           icon: Icon(Icons.add),
           label: Text('Create Invoice'),
@@ -97,7 +98,7 @@ class MyView extends GetView<MyController> {
                                             Get.dialog(WarningDialog(
                                                 file: file.path.split("/").last,
                                                 description:
-                                                    "Do you want to delete ${file.path.split("/").last.split(".").first} invoice receipt",
+                                                    "Do you want to delete ${file.path.split("/").last.split(".").first} invoice receipt.",
                                                 allowDismissal: true));
                                           },
                                           child: Container(
