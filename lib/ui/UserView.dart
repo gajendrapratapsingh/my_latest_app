@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:myapp/controllers/UserController.dart';
+import 'package:myapp/controllers/theme_controller.dart';
 import 'package:myapp/models/User.dart';
 import 'package:myapp/theme/colors.dart';
 import 'package:myapp/ui/MyView.dart';
@@ -29,7 +30,7 @@ class UserView extends GetView<UserController> {
         key: _scaffoldKey,
         appBar: AppBar(
           title: const Text('My App', style: TextStyle(color: Colors.white)),
-          backgroundColor: AppColors.kAppBarColor,
+          //backgroundColor: AppColors.kAppBarColor,
           leading: IconButton(onPressed: (){
             _scaffoldKey.currentState!.openDrawer();
           }, icon: const FaIcon(FontAwesomeIcons.navicon, color: Colors.white)),
@@ -76,7 +77,7 @@ class UserView extends GetView<UserController> {
             },
           ),
         ],)),
-        floatingActionButton: FloatingActionButton(onPressed: (){showBottomSheet();}, backgroundColor: AppColors.kAppBarColor, child: const Icon(Icons.add, color: Colors.white)),
+        floatingActionButton: FloatingActionButton(onPressed: (){Get.find<ThemeController>().toggleTheme();}, child: const Icon(Icons.add, color: Colors.white)),
         body: Obx(() {
             switch (controller.state.value) {
               case UserState.loading: return const Center(child: CircularProgressIndicator(color: Colors.grey));
