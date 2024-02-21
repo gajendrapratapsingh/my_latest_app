@@ -11,6 +11,18 @@ class CustomTheme {
     datePickerTheme: DatePickerThemeData(
       backgroundColor: Colors.white
     ),
+    colorScheme: ColorScheme.light(
+      primary: Colors.blue,
+      onPrimary: Colors.white,
+      secondary: Colors.teal,
+      onSecondary: Colors.white,
+      error: Colors.red,
+      onError: Colors.white,
+      background: Colors.grey[900]!,
+      onBackground: Colors.white,
+      surface: Colors.white,
+      onSurface: Colors.black,
+    ),
     appBarTheme: AppBarTheme(
       color: Colors.blue,
       iconTheme: IconThemeData(color: Colors.white),
@@ -49,7 +61,19 @@ class CustomTheme {
     ),
     datePickerTheme: DatePickerThemeData(),
     cardColor: Colors.blueGrey[800],
-    colorScheme: ColorScheme(brightness: brightness, primary: primary, onPrimary: onPrimary, secondary: secondary, onSecondary: onSecondary, error: error, onError: onError, background: background, onBackground: onBackground, surface: surface, onSurface: onSurface),
+    badgeTheme: BadgeThemeData(),
+    colorScheme: ColorScheme.dark(
+      primary: Colors.blue,
+      onPrimary: Colors.white,
+      secondary: Colors.teal,
+      onSecondary: Colors.white,
+      error: Colors.red,
+      onError: Colors.white,
+      background: Colors.grey[900]!,
+      onBackground: Colors.white,
+      surface: Colors.white,
+      onSurface: Colors.black,
+    ),
     appBarTheme: AppBarTheme(
       color: Colors.blueGrey[800],
       iconTheme: IconThemeData(color: Colors.white),
