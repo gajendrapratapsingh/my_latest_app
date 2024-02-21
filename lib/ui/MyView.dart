@@ -16,7 +16,7 @@ class MyView extends GetView<MyController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(context, "My App"),
+      appBar: AppBar(title: Text("My App")),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () async {
             Get.dialog(InvoiceDialog());
@@ -51,7 +51,6 @@ class MyView extends GetView<MyController> {
                             padding: const EdgeInsets.all(5.0),
                             child: Card(
                               elevation: 5,
-                              color: Colors.white,
                               shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.only(
                                       bottomRight: Radius.circular(10),
@@ -78,11 +77,7 @@ class MyView extends GetView<MyController> {
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 10.0, vertical: 5.0),
-                                          child: Text(file.path
-                                              .split("/")
-                                              .last
-                                              .split(".")
-                                              .first),
+                                          child: Text(file.path.split("/").last.split(".").first),
                                         ),
                                       ],
                                     ),
@@ -134,7 +129,6 @@ class MyView extends GetView<MyController> {
                                             height: 32,
                                             width: 32,
                                             decoration: const BoxDecoration(
-                                              color: AppColors.kAppBarColor,
                                               borderRadius: BorderRadius.only(
                                                   topRight: Radius.circular(5.0)),
                                             ),

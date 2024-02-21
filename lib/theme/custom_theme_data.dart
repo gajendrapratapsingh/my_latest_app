@@ -7,9 +7,14 @@ class CustomTheme {
     primaryColor: AppColors.kAppBarColor,
     hintColor: AppColors.kPrimaryColor,
     scaffoldBackgroundColor: Colors.white,
+    cardColor: Colors.white,
+    datePickerTheme: DatePickerThemeData(
+      backgroundColor: Colors.white
+    ),
     appBarTheme: AppBarTheme(
-      color: AppColors.kAppBarColor,
+      color: Colors.blue,
       iconTheme: IconThemeData(color: Colors.white),
+      titleTextStyle: TextStyle(color: Colors.white, fontSize: 21),
       // textTheme: TextTheme(
       //   headline6: TextStyle(
       //     color: Colors.white,
@@ -37,16 +42,18 @@ class CustomTheme {
     primaryColor: Colors.blueGrey[800],
     hintColor: Colors.orange,
     scaffoldBackgroundColor: Colors.grey[900],
+    drawerTheme: DrawerThemeData(
+      backgroundColor: Colors.blueGrey[800],
+      elevation: 4,
+      shadowColor: Colors.black
+    ),
+    datePickerTheme: DatePickerThemeData(),
+    cardColor: Colors.blueGrey[800],
+    colorScheme: ColorScheme(brightness: brightness, primary: primary, onPrimary: onPrimary, secondary: secondary, onSecondary: onSecondary, error: error, onError: onError, background: background, onBackground: onBackground, surface: surface, onSurface: onSurface),
     appBarTheme: AppBarTheme(
       color: Colors.blueGrey[800],
       iconTheme: IconThemeData(color: Colors.white),
-      // textTheme: TextTheme(
-      //   headline6: TextStyle(
-      //     color: Colors.white,
-      //     fontSize: 20,
-      //     fontWeight: FontWeight.bold,
-      //   ),
-      // ),
+      titleTextStyle: TextStyle(color: Colors.white, fontSize: 21),
       systemOverlayStyle: SystemUiOverlayStyle.light,
     ),
     textTheme: TextTheme(

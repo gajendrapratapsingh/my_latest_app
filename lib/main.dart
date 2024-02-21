@@ -42,6 +42,9 @@ class MyApp extends StatelessWidget {
           theme: CustomTheme.lightTheme, // Use default theme initially
           darkTheme: CustomTheme.darkTheme,
           themeMode: ThemeMode.system, // Use system theme initially
+          // theme: ThemeData.light(), // Use default theme initially
+          // darkTheme: ThemeData.dark(),
+          // themeMode: ThemeMode.system, // Use system theme initially
           getPages: Pages.list,
           initialRoute: Routes.splashScreen,
           initialBinding: MyBinding(),
