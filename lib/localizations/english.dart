@@ -1,5 +1,5 @@
 class English{
-  static const String appName = "CRIS MMIS";
+  static const String appName = "My App";
   static const String hello = "Hello";
   static const String homescreen = "Home Screen";
   static const String back = "Back";

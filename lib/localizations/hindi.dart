@@ -1,5 +1,5 @@
 class Hindi{
-  static const String appName = "क्रिस एमएमआईएस";
+  static const String appName = "मेरा ऐप";
   static const String hello = "नमस्ते";
   static const String homescreen = "होम स्क्रीन";
   static const String back = "पीछे";

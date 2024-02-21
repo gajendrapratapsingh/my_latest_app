@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -8,9 +7,10 @@ import 'package:myapp/controllers/network_controller.dart';
 import 'package:myapp/models/User.dart';
 import 'package:myapp/theme/colors.dart';
 import 'package:myapp/theme/custom_theme_data.dart';
+import 'package:myapp/ui/noInternet.dart';
 import 'package:myapp/utils/routes/routes.dart';
 import 'package:myapp/utils/strings.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:myapp/widgets/confirm_dialog.dart';
 
 class UserView extends GetView<UserController> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -33,7 +33,7 @@ class UserView extends GetView<UserController> {
         controller.handleBackButton();
         return false;
       },
-      child: Scaffold(
+      child: Obx(() => networkController.connectionStatus.value == 0 ? NoInternet() : Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
           title: Text("${Strings.appName.tr}"),
@@ -94,10 +94,10 @@ class UserView extends GetView<UserController> {
                           ),
                         ),
                         if(_languageController.selectedLanguage == value)
-                        Icon(
-                          Icons.check_box,
-                          color: Colors.blue,
-                        ),
+                          Icon(
+                            Icons.check_box,
+                            color: Colors.blue,
+                          ),
                       ],
                     ),
                   );
@@ -110,7 +110,7 @@ class UserView extends GetView<UserController> {
                 _scaffoldKey.currentState!.openDrawer();
               },
               icon:
-                  const FaIcon(FontAwesomeIcons.navicon, color: Colors.white)),
+              const FaIcon(FontAwesomeIcons.navicon, color: Colors.white)),
         ),
         drawer: Drawer(
           child: Column(
@@ -175,7 +175,10 @@ class UserView extends GetView<UserController> {
                       leading: const Icon(Icons.palette, color: Colors.blue), // Change color here
                       title: const Text('Change Theme'),
                       onTap: () {
-                        // Implement change theme functionality
+                        if(_scaffoldKey.currentState!.isDrawerOpen) {
+                          _scaffoldKey.currentState!.closeDrawer();
+                          Get.isDarkMode ? Get.changeTheme(CustomTheme.lightTheme) : Get.changeTheme(CustomTheme.darkTheme);
+                        }
                       },
                     ),
                     ListTile(
@@ -193,12 +196,10 @@ class UserView extends GetView<UserController> {
                   child: Column(
                     children: [
                       InkWell(
-                        onTap: () async{
-                          SharedPreferences prefs = await SharedPreferences.getInstance();
+                        onTap: (){
                           if(_scaffoldKey.currentState!.isDrawerOpen) {
                             _scaffoldKey.currentState!.closeDrawer();
-                            prefs.clear();
-                            Get.offAndToNamed(Routes.loginScreen);
+                            Get.dialog(ConfirmDialog());
                           }
                         },
                         child: Container(
@@ -223,9 +224,7 @@ class UserView extends GetView<UserController> {
         floatingActionButton: FloatingActionButton(
             onPressed: () {
               //Get.find<ThemeController>().toggleTheme();
-              Get.isDarkMode
-                  ? Get.changeTheme(CustomTheme.lightTheme)
-                  : Get.changeTheme(CustomTheme.darkTheme);
+
             },
             child: const Icon(Icons.add, color: Colors.white)),
         body: Obx(() {
@@ -257,14 +256,14 @@ class UserView extends GetView<UserController> {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                    Image.asset('assets/images/no_data.png',
-                        height: 80, width: 80, fit: BoxFit.cover),
-                    const SizedBox(height: 5.0),
-                    const Text("Data not found")
-                  ]));
+                        Image.asset('assets/images/no_data.png',
+                            height: 80, width: 80, fit: BoxFit.cover),
+                        const SizedBox(height: 5.0),
+                        const Text("Data not found")
+                      ]));
           }
         }),
-      ),
+      )),
     );
   }
 
