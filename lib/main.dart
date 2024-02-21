@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:myapp/localizations/languages.dart';
 import 'package:myapp/theme/colors.dart';
 import 'package:myapp/theme/custom_theme_data.dart';
 import 'package:myapp/ui/auth/screens/login_screen.dart';
@@ -21,6 +22,9 @@ void main() async{
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  //appID: 1520639563,
+  //appSign: "ad39fc999631dcc983e538dca1662d35c8059a0bdeb5bcaa0f935fa298f3cfac",
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -33,6 +37,9 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           title: 'My App with Getx State Management',
           debugShowCheckedModeBanner: false,
+          translations: Languages(),
+          locale: Get.deviceLocale,
+          fallbackLocale: const Locale('en', 'US'),
           // theme: ThemeData(
           //   colorScheme: ColorScheme.light(onPrimary: AppColors.kAppBarColor),
           //   useMaterial3: true,

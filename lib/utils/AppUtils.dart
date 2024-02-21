@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:myapp/theme/colors.dart';
 
@@ -56,5 +59,36 @@ class AppUtils{
           textColor: Colors.white,
           fontSize: 16.0
       );
+   }
+
+   static error(String message) {
+      return Get.snackbar('Alert', message,
+          backgroundColor: Colors.red, colorText: Colors.white);
+   }
+
+   static networkError(String message) {
+      return Get.snackbar('Network Error', message,
+          backgroundColor: Colors.red, colorText: Colors.white);
+   }
+
+   static toastMessage(String message){
+      return Fluttertoast.showToast(msg: message, backgroundColor: Colors.black, textColor: Colors.white, fontSize: 14);
+   }
+
+   static backPress(String message) {
+      return Fluttertoast.showToast(msg: message, backgroundColor: Colors.black, textColor: Colors.white, gravity: ToastGravity.BOTTOM, fontSize: 14);
+   }
+
+   static Future<bool> checkconnection() async {
+      var connectivityresult;
+      try {
+         connectivityresult = await InternetAddress.lookup('google.com');
+         if (connectivityresult != null) {
+            return true;
+         }
+      } on SocketException catch (_) {
+         return false;
+      }
+      return false;
    }
 }

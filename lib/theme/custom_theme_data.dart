@@ -18,7 +18,7 @@ class CustomTheme {
       onSecondary: Colors.white,
       error: Colors.red,
       onError: Colors.white,
-      background: Colors.grey[900]!,
+      background: Colors.white,
       onBackground: Colors.white,
       surface: Colors.white,
       onSurface: Colors.black,

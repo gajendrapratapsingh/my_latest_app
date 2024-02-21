@@ -5,6 +5,8 @@ import 'package:hive/hive.dart';
 import 'package:myapp/api/ApiProvider.dart';
 import 'package:myapp/models/User.dart';
 import 'package:myapp/theme/colors.dart';
+import 'package:myapp/utils/AppUtils.dart';
+import 'package:myapp/utils/strings.dart';
 
 enum UserState { loading, success, failure }
 
@@ -49,25 +51,11 @@ class UserController extends GetxController {
   }
 
   DateTime? lastPressedTime;
-
   void handleBackButton() {
     final currentTime = DateTime.now();
-    if (lastPressedTime == null || currentTime.difference(lastPressedTime!) > const Duration(seconds: 2)) {
+    if(lastPressedTime == null || currentTime.difference(lastPressedTime!) > const Duration(seconds: 2)) {
       lastPressedTime = currentTime;
-      Get.snackbar(
-        "My App",
-        "Again press to exit from application",
-        icon: const Icon(Icons.person, color: Colors.white),
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: AppColors.kGreyDk,
-        borderRadius: 20,
-        margin: const EdgeInsets.all(15),
-        colorText: Colors.white,
-        duration: const Duration(seconds: 2),
-        isDismissible: true,
-        forwardAnimationCurve: Curves.easeOutBack,
-
-      );
+      AppUtils.backPress(Strings.backpress.tr);
     } else {
       //Get.back(); // Close the current screen
       // Alternatively, you can use SystemNavigator.pop() to exit the app completely
