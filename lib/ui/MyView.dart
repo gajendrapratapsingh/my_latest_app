@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myapp/common/app_bar.dart';
 import 'package:myapp/controllers/MyController.dart';
 import 'package:myapp/theme/colors.dart';
 import 'package:myapp/utils/PdfApi.dart';

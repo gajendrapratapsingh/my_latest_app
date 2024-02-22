@@ -210,7 +210,7 @@ class UserView extends GetView<UserController> {
                             children: [
                               Icon(Icons.logout, color: Colors.white),
                               SizedBox(width: 10),
-                              Text("LogOut", style: TextStyle(fontSize: 16, color: Colors.white))
+                              Text("${Strings.logout.tr}", style: TextStyle(fontSize: 16, color: Colors.white))
                             ],
                           ),
                         ),
