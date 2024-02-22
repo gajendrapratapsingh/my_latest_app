@@ -5,6 +5,7 @@ import 'package:myapp/common/app_bar.dart';
 import 'package:myapp/controllers/MyController.dart';
 import 'package:myapp/theme/colors.dart';
 import 'package:myapp/utils/PdfApi.dart';
+import 'package:myapp/utils/strings.dart';
 import 'package:myapp/widgets/invoice_dialog.dart';
 
 import 'package:myapp/widgets/warning_dialog.dart';
@@ -16,7 +17,7 @@ class MyView extends GetView<MyController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("My App")),
+      appBar: AppBar(title: Text("${Strings.appName.tr}")),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () async {
             Get.dialog(InvoiceDialog());

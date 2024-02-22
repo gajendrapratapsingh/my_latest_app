@@ -45,6 +45,8 @@ class Languages extends Translations {
       Strings.mappingdept : Hindi.mappingdept,
       Strings.crismmis : Hindi.crismmis,
       Strings.deptmapping : Hindi.deptmapping,
+      Strings.lightmode : Hindi.lightmode,
+      Strings.nightmode : Hindi.nightmode,
 
       //---- No Internet Screen ----
       Strings.errortitle : Hindi.errortitle,
@@ -90,6 +92,8 @@ class Languages extends Translations {
       Strings.mappingdept : English.mappingdept,
       Strings.crismmis : English.crismmis,
       Strings.deptmapping : English.deptmapping,
+      Strings.lightmode : English.lightmode,
+      Strings.nightmode : English.nightmode,
 
       //---- No Internet Screen ----
       Strings.errortitle : English.errortitle,
