@@ -16,6 +16,7 @@ class MyBinding implements Bindings {
     //Get.lazyPut<SplashController>(() => SplashController());
     Get.put(LoginController());
     Get.put(UserController());
+    Get.put(ThemeController());
     Get.put(LanguageController());
     //Get.lazyPut<LoginController>(() => LoginController());
     //Get.lazyPut<UserController>(() => UserController());

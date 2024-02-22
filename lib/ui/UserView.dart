@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import 'package:myapp/controllers/UserController.dart';
 import 'package:myapp/controllers/language_controller.dart';
 import 'package:myapp/controllers/network_controller.dart';
+import 'package:myapp/controllers/theme_controller.dart';
 import 'package:myapp/models/User.dart';
 import 'package:myapp/theme/colors.dart';
-import 'package:myapp/theme/custom_theme_data.dart';
 import 'package:myapp/ui/noInternet.dart';
 import 'package:myapp/utils/routes/routes.dart';
 import 'package:myapp/utils/strings.dart';
@@ -120,9 +120,9 @@ class UserView extends GetView<UserController> {
                   padding: EdgeInsets.zero,
                   children: <Widget>[
                     DrawerHeader(
-                      decoration: const BoxDecoration(
-                        color: AppColors.kAppBarColor,
-                      ),
+                      // decoration: const BoxDecoration(
+                      //   color: AppColors.kAppBarColor,
+                      // ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -132,7 +132,7 @@ class UserView extends GetView<UserController> {
                             width: 75,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(35.0),
-                              border: Border.all(color: Colors.white),
+                              border: Border.all(),
                             ),
                             child: ClipOval(
                               child: Image.network(
@@ -152,8 +152,8 @@ class UserView extends GetView<UserController> {
                             ),
                           ),
                           const SizedBox(height: 5.0),
-                          Text(controller.name, style: const TextStyle(color: Colors.white)),
-                          Text(controller.email.toLowerCase(), style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w300)),
+                          Text(controller.name),
+                          Text(controller.email.toLowerCase()),
                         ],
                       ),
                     ),
@@ -165,22 +165,22 @@ class UserView extends GetView<UserController> {
                       },
                     ),
                     ListTile(
-                      leading: const Icon(Icons.info, color: Colors.green), // Change color here
+                      leading: const Icon(Icons.info, color: Colors.green),
                       title: const Text('About'),
                       onTap: () {
                         // Navigate to about page
                       },
                     ),
-                    ListTile(
-                      leading: const Icon(Icons.palette, color: Colors.blue), // Change color here
-                      title: const Text('Change Theme'),
+                    Obx(() => ListTile(
+                      leading: Get.find<ThemeController>().getTheme() ? Container(height: 32, width: 32, child: Image.asset('assets/images/moon.png')) : Container(height: 32, width: 32, child: Image.asset('assets/images/sun.png')), // Change color here
+                      title: Get.find<ThemeController>().getTheme() ? Text("${Strings.nightmode.tr}") : Text("${Strings.lightmode.tr}"),
                       onTap: () {
                         if(_scaffoldKey.currentState!.isDrawerOpen) {
                           _scaffoldKey.currentState!.closeDrawer();
-                          Get.isDarkMode ? Get.changeTheme(CustomTheme.lightTheme) : Get.changeTheme(CustomTheme.darkTheme);
+                          Get.find<ThemeController>().toggleTheme();
                         }
                       },
-                    ),
+                    )),
                     ListTile(
                       leading: const Icon(Icons.menu, color: Colors.orange), // Change color here
                       title: const Text('Menu'),
@@ -224,7 +224,6 @@ class UserView extends GetView<UserController> {
         floatingActionButton: FloatingActionButton(
             onPressed: () {
               //Get.find<ThemeController>().toggleTheme();
-
             },
             child: const Icon(Icons.add, color: Colors.white)),
         body: Obx(() {

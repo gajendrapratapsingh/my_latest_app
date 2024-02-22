@@ -33,6 +33,8 @@ class English{
   static const String yesbtn = "YES";
   static const String nobtn = "NO";
   static const String logoutcfrm = "Are you sure you want to logout?";
+  static const String nightmode = "Night Mode";
+  static const String lightmode = "Light Mode";
 
   static const String nonstkdmd = "Non-Stock Demands";
   static const String reports = "Reports";

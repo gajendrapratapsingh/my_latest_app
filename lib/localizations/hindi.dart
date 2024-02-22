@@ -33,6 +33,8 @@ class Hindi{
   static const String yesbtn = "हाँ";
   static const String nobtn = "नहीं";
   static const String logoutcfrm = "क्या आप लॉग आउट करना चाहते हैं?";
+  static const String nightmode = "नाईट मोड";
+  static const String lightmode = "लाइट मोड";
 
   static const String nonstkdmd = "गैर-स्टॉक मांगें";
   static const String reports = "रिपोर्टों";
