@@ -1,169 +1,115 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/utils/AppUtils.dart';
 
 class CustomTheme {
-
-  static ThemeData lightTheme = ThemeData(
-    useMaterial3: true,
-    scaffoldBackgroundColor: Colors.grey.shade50,
-    brightness: Brightness.light,
-    visualDensity: VisualDensity.adaptivePlatformDensity,
-    colorScheme: const ColorScheme.light(
-      primary: Color(0xFF6750a4),
-      onPrimary: Color(0xFFffffff),
-      primaryContainer: Color(0xFFe9ddff),
-      onPrimaryContainer: Color(0xFF22005d),
-    ),
-    appBarTheme: AppBarTheme(
-      iconTheme: IconThemeData(color: Colors.white),
-      titleTextStyle: TextStyle(color: Colors.white, fontSize: 21),
-      color: Colors.orange,
-      systemOverlayStyle: SystemUiOverlayStyle.light,
-    ),
-  );
-
-  static ThemeData darkTheme = ThemeData(
-    useMaterial3: true,
-    scaffoldBackgroundColor: Colors.grey.shade900,
-    brightness: Brightness.dark,
-    visualDensity: VisualDensity.adaptivePlatformDensity,
-    colorScheme: const ColorScheme.dark(
-      primary: Color(0xFFcfbcff),
-      onPrimary: Color(0xFF381e72),
-      primaryContainer: Color(0xFF4f378a),
-      onPrimaryContainer: Color(0xFFe9ddff),
-    ),
-    appBarTheme: AppBarTheme(
-      iconTheme: IconThemeData(color: Colors.white),
-      titleTextStyle: TextStyle(color: Colors.white, fontSize: 21),
-      color: Colors.grey.shade700,
-      systemOverlayStyle: SystemUiOverlayStyle.light,
-    ),
-  );
-
-  // //LightTheme
-  // static ThemeData lightTheme = ThemeData(
-  //   primarySwatch: Colors.grey,
-  //   primaryColor: Colors.white,
-  //   brightness: Brightness.light,
-  //   backgroundColor: const Color(0xFFE5E5E5),
-  //   dividerColor: Colors.white54,
-  // );
-  // TextStyle lightTextStyle = TextStyle(
-  //   fontSize: 20,
-  //   color: Colors.black,
-  // );
-  // TextTheme lightTextTheme = TextTheme(
-  //   bodyText1:TextStyle(color: Colors.black),
+  // static const appBarTheme = AppBarTheme(centerTitle: false, elevation: 0);
+  //
+  // // Light TextTheme
+  // static const lightTextTheme = TextTheme(
+  //   headline1: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+  //   headline2: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+  //   bodyText1: TextStyle(fontSize: 16, color: Colors.black),
+  //   bodyText2: TextStyle(fontSize: 14, color: Colors.grey),
   // );
   //
-  // //DarkTheme
-  // static ThemeData darkTheme = ThemeData(
-  //   primarySwatch: Colors.grey,
-  //   primaryColor: Colors.black,
-  //   brightness: Brightness.dark,
-  //   backgroundColor: const Color(0xFF212121),
-  //   dividerColor: Colors.black12,
+  // // Dark TextTheme
+  // static const darkTextTheme = TextTheme(
+  //   headline1: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+  //   headline2: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+  //   bodyText1: TextStyle(fontSize: 16, color: Colors.white),
+  //   bodyText2: TextStyle(fontSize: 14, color: AppUtils.kLightGrey)
   // );
-  // TextStyle darkTextStyle = TextStyle(
-  //   fontSize: 20,
-  //   color: Colors.white,
-  // );
-  // TextTheme darkTextTheme = TextTheme(
-  //   bodyText1: TextStyle(color: Colors.white),
-  // );
-
-  // static ThemeData lightTheme = ThemeData(
-  //   primaryColor: AppColors.kAppBarColor,
-  //   hintColor: AppColors.kPrimaryColor,
-  //   scaffoldBackgroundColor: Colors.white,
-  //   cardColor: Colors.white,
-  //   drawerTheme: DrawerThemeData(
   //
+  // static ThemeData lightTheme = ThemeData.light().copyWith(
+  //   useMaterial3: true,
+  //   primaryColor: AppUtils.kPrimaryColor,
+  //   scaffoldBackgroundColor: AppUtils.whiteColor,
+  //   appBarTheme: appBarTheme,
+  //   iconTheme: const IconThemeData(color: AppUtils.kContentColorLightTheme),
+  //   textTheme: GoogleFonts.interTextTheme(lightTextTheme).apply(bodyColor: AppUtils.kContentColorLightTheme),
+  //   colorScheme: const ColorScheme.light(
+  //     primary: AppUtils.kPrimaryColor,
+  //     secondary: AppUtils.kSecondaryColor,
+  //     error: AppUtils.kErrorColor,
   //   ),
-  //   datePickerTheme: DatePickerThemeData(
-  //     backgroundColor: Colors.white
-  //   ),
-  //   colorScheme: ColorScheme.light(
-  //     primary: Colors.blue,
-  //     onPrimary: Colors.white,
-  //     secondary: Colors.blue,
-  //     onSecondary: Colors.white,
-  //     error: Colors.red,
-  //     onError: Colors.white,
-  //     background: Colors.white,
-  //     onBackground: Colors.white,
-  //     surface: Colors.white,
-  //     onSurface: Colors.black,
-  //   ),
-  //   appBarTheme: AppBarTheme(
-  //     color: Colors.blue,
-  //     iconTheme: IconThemeData(color: Colors.white),
-  //     titleTextStyle: TextStyle(color: Colors.white, fontSize: 21),
-  //     // textTheme: TextTheme(
-  //     //   headline6: TextStyle(
-  //     //     color: Colors.white,
-  //     //     fontSize: 20,
-  //     //     fontWeight: FontWeight.bold,
-  //     //   ),
-  //     // ),
-  //     systemOverlayStyle: SystemUiOverlayStyle.dark,
-  //   ),
-  //   textTheme: TextTheme(
-  //     bodyText1: TextStyle(color: Colors.black),
-  //     bodyText2: TextStyle(color: Colors.black87),
-  //     headline6: TextStyle(color: Colors.black, fontSize: 18),
-  //   ),
-  //   buttonTheme: ButtonThemeData(
-  //     buttonColor: AppColors.kButtonColor,
-  //     textTheme: ButtonTextTheme.primary,
-  //     shape: RoundedRectangleBorder(
-  //       borderRadius: BorderRadius.circular(10),
-  //     ),
+  //   bottomNavigationBarTheme: BottomNavigationBarThemeData(
+  //     backgroundColor: Colors.white,
+  //     selectedItemColor: AppUtils.kContentColorLightTheme.withOpacity(0.7),
+  //     unselectedItemColor: AppUtils.kContentColorLightTheme.withOpacity(0.32),
+  //     selectedIconTheme: const IconThemeData(color: AppUtils.kPrimaryColor),
+  //     showUnselectedLabels: true,
   //   ),
   // );
   //
   // static ThemeData darkTheme = ThemeData.dark().copyWith(
-  //   primaryColor: Colors.blueGrey[800],
-  //   hintColor: Colors.orange,
-  //   scaffoldBackgroundColor: Colors.grey[900],
-  //   drawerTheme: DrawerThemeData(
-  //     backgroundColor: Colors.blueGrey[800],
-  //     elevation: 4,
-  //     shadowColor: Colors.white
+  //   useMaterial3: true,
+  //   primaryColor: AppUtils.kPrimaryColor,
+  //   scaffoldBackgroundColor: AppUtils.kContentColorLightTheme,
+  //   appBarTheme: appBarTheme.copyWith(backgroundColor: AppUtils.kContentColorLightTheme),
+  //   iconTheme: const IconThemeData(color: AppUtils.kContentColorDarkTheme),
+  //   textTheme: GoogleFonts.interTextTheme(darkTextTheme).apply(bodyColor: AppUtils.kContentColorDarkTheme),
+  //   colorScheme: const ColorScheme.dark().copyWith(
+  //     primary: AppUtils.kPrimaryColor,
+  //     secondary: AppUtils.kSecondaryColor,
+  //     error: AppUtils.kErrorColor,
   //   ),
-  //   datePickerTheme: DatePickerThemeData(),
-  //   cardColor: Colors.blueGrey[800],
-  //   badgeTheme: BadgeThemeData(),
-  //   colorScheme: ColorScheme.dark(
-  //     primary: Colors.grey,
-  //     onPrimary: Colors.white,
-  //     secondary: Colors.teal,
-  //     onSecondary: Colors.white,
-  //     error: Colors.red,
-  //     onError: Colors.white,
-  //     background: Colors.grey[900]!,
-  //     onBackground: Colors.white,
-  //     surface: Colors.white,
-  //     onSurface: Colors.white,
-  //   ),
-  //   appBarTheme: AppBarTheme(
-  //     color: Colors.blueGrey[800],
-  //     iconTheme: IconThemeData(color: Colors.white),
-  //     titleTextStyle: TextStyle(color: Colors.white, fontSize: 21),
-  //     systemOverlayStyle: SystemUiOverlayStyle.light,
-  //   ),
-  //   textTheme: TextTheme(
-  //     bodyText1: TextStyle(color: Colors.white),
-  //     bodyText2: TextStyle(color: Colors.white),
-  //     headline6: TextStyle(color: Colors.white, fontSize: 18),
-  //   ),
-  //   buttonTheme: ButtonThemeData(
-  //     buttonColor: Colors.blueGrey[800],
-  //     textTheme: ButtonTextTheme.primary,
-  //     shape: RoundedRectangleBorder(
-  //       borderRadius: BorderRadius.circular(10),
-  //     ),
+  //   bottomNavigationBarTheme: BottomNavigationBarThemeData(
+  //     backgroundColor: AppUtils.kContentColorLightTheme,
+  //     selectedItemColor: Colors.white70,
+  //     unselectedItemColor: AppUtils.kContentColorDarkTheme.withOpacity(0.32),
+  //     selectedIconTheme: const IconThemeData(color: AppUtils.kPrimaryColor),
+  //     showUnselectedLabels: true,
   //   ),
   // );
+
+  static const AppBarTheme appBarTheme = const AppBarTheme(color: Colors.transparent, elevation: 0);
+
+  static ThemeData lightTheme = ThemeData(
+    appBarTheme: appBarTheme,
+    primaryColor: AppUtils.kPrimaryColor,
+    // accentColor: kAccentLightColor,
+    scaffoldBackgroundColor: Colors.white,
+    colorScheme: const ColorScheme.light(
+      secondary: AppUtils.kSecondaryLightColor,
+      background: Colors.white,
+      // on light theme surface = Colors.white by default
+    ),
+    // backgroundColor: Colors.white,
+    iconTheme: const IconThemeData(color: AppUtils.kBodyTextColorLight),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      foregroundColor: AppUtils.kAccentIconLightColor,
+    ),
+    primaryIconTheme: const IconThemeData(color: AppUtils.kPrimaryIconLightColor),
+    textTheme: GoogleFonts.latoTextTheme().copyWith(
+      bodyLarge: const TextStyle(color: AppUtils.kBodyTextColorLight),
+      bodyMedium: const TextStyle(color: AppUtils.kBodyTextColorLight),
+      headlineMedium:
+      const TextStyle(color: AppUtils.kTitleTextLightColor, fontSize: 32),
+      displayLarge: const TextStyle(color: AppUtils.kTitleTextLightColor, fontSize: 80),
+    ),
+  );
+
+  static ThemeData darkTheme = ThemeData.dark().copyWith(
+    primaryColor: AppUtils.kPrimaryColor,
+    // accentColor: kAccentDarkColor,
+    scaffoldBackgroundColor: const Color(0xFF0D0C0E),
+    appBarTheme: appBarTheme,
+    colorScheme: const ColorScheme.light(
+      secondary: AppUtils.kSecondaryDarkColor,
+      surface: AppUtils.kSurfaceDarkColor,
+      background: AppUtils.kBackgroundDarkColor,
+    ),
+    iconTheme: const IconThemeData(color: AppUtils.kBodyTextColorDark),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      foregroundColor: AppUtils.kAccentIconDarkColor,
+    ),
+    primaryIconTheme: const IconThemeData(color: AppUtils.kPrimaryIconDarkColor),
+    textTheme: GoogleFonts.latoTextTheme().copyWith(
+      bodyLarge: const TextStyle(color: AppUtils.kBodyTextColorDark),
+      bodyMedium: const TextStyle(color: AppUtils.kBodyTextColorDark),
+      headlineMedium: const TextStyle(color: AppUtils.kTitleTextDarkColor, fontSize: 32),
+      displayLarge: const TextStyle(color: AppUtils.kTitleTextDarkColor, fontSize: 80),
+    ),
+  );
 }

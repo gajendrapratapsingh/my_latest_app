@@ -6,11 +6,10 @@ import 'package:myapp/controllers/language_controller.dart';
 import 'package:myapp/controllers/network_controller.dart';
 import 'package:myapp/controllers/theme_controller.dart';
 import 'package:myapp/models/User.dart';
-import 'package:myapp/theme/colors.dart';
 import 'package:myapp/ui/noInternet.dart';
 import 'package:myapp/utils/routes/routes.dart';
 import 'package:myapp/utils/strings.dart';
-import 'package:myapp/widgets/confirm_dialog.dart';
+import 'package:myapp/widgets/navigation_drawer.dart';
 
 class UserView extends GetView<UserController> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -112,120 +111,123 @@ class UserView extends GetView<UserController> {
               icon:
               const FaIcon(FontAwesomeIcons.navicon, color: Colors.white)),
         ),
-        drawer: Drawer(
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView(
-                  padding: EdgeInsets.zero,
-                  children: <Widget>[
-                    DrawerHeader(
-                      // decoration: const BoxDecoration(
-                      //   color: AppColors.kAppBarColor,
-                      // ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: 75,
-                            width: 75,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(35.0),
-                              border: Border.all(),
-                            ),
-                            child: ClipOval(
-                              child: Image.network(
-                                controller.image,
-                                fit: BoxFit.cover,
-                                loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-                                  if (loadingProgress == null) {
-                                    return child;
-                                  } else {
-                                    return Image.asset('assets/images/person.png', fit: BoxFit.cover);
-                                  }
-                                },
-                                errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-                                  return Image.asset('assets/images/person.png', fit: BoxFit.cover);
-                                },
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 5.0),
-                          Text(controller.name),
-                          Text(controller.email.toLowerCase()),
-                        ],
-                      ),
-                    ),
-                    ListTile(
-                      leading: const Icon(Icons.settings, color: Colors.red), // Change color here
-                      title: const Text('Settings'),
-                      onTap: () {
-                        // Navigate to settings page
-                      },
-                    ),
-                    ListTile(
-                      leading: const Icon(Icons.info, color: Colors.green),
-                      title: const Text('About'),
-                      onTap: () {
-                        // Navigate to about page
-                      },
-                    ),
-                    Obx(() => ListTile(
-                      leading: Get.find<ThemeController>().getTheme() ? Container(height: 32, width: 32, child: Image.asset('assets/images/moon.png')) : Container(height: 32, width: 32, child: Image.asset('assets/images/sun.png')), // Change color here
-                      title: Get.find<ThemeController>().getTheme() ? Text("${Strings.nightmode.tr}") : Text("${Strings.lightmode.tr}"),
-                      onTap: () {
-                        if(_scaffoldKey.currentState!.isDrawerOpen) {
-                          _scaffoldKey.currentState!.closeDrawer();
-                          Get.find<ThemeController>().toggleTheme();
-                        }
-                      },
-                    )),
-                    ListTile(
-                      leading: const Icon(Icons.menu, color: Colors.orange), // Change color here
-                      title: const Text('Menu'),
-                      onTap: () {
-                        // Implement menu functionality
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              Align(
-                  alignment: Alignment.center,
-                  child: Column(
-                    children: [
-                      InkWell(
-                        onTap: (){
-                          if(_scaffoldKey.currentState!.isDrawerOpen) {
-                            _scaffoldKey.currentState!.closeDrawer();
-                            Get.dialog(ConfirmDialog());
-                          }
-                        },
-                        child: Container(
-                          height: 45,
-                          color: AppColors.kAppBarColor,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.logout, color: Colors.white),
-                              SizedBox(width: 10),
-                              Text("${Strings.logout.tr}", style: TextStyle(fontSize: 16, color: Colors.white))
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  )
-              ),
-            ],
-          ),
-        ),
+        drawer: CustomNavigationDrawer(name: controller.name, email: controller.email, image: controller.image),
+        // drawer: Drawer(
+        //   child: Column(
+        //     children: [
+        //       Expanded(
+        //         child: ListView(
+        //           padding: EdgeInsets.zero,
+        //           children: <Widget>[
+        //             DrawerHeader(
+        //               // decoration: const BoxDecoration(
+        //               //   color: AppColors.kAppBarColor,
+        //               // ),
+        //               child: Column(
+        //                 mainAxisAlignment: MainAxisAlignment.start,
+        //                 crossAxisAlignment: CrossAxisAlignment.start,
+        //                 children: [
+        //                   Container(
+        //                     height: 75,
+        //                     width: 75,
+        //                     decoration: BoxDecoration(
+        //                       borderRadius: BorderRadius.circular(35.0),
+        //                       border: Border.all(),
+        //                     ),
+        //                     child: ClipOval(
+        //                       child: Image.network(
+        //                         controller.image,
+        //                         fit: BoxFit.cover,
+        //                         loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+        //                           if (loadingProgress == null) {
+        //                             return child;
+        //                           } else {
+        //                             return Image.asset('assets/images/person.png', fit: BoxFit.cover);
+        //                           }
+        //                         },
+        //                         errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+        //                           return Image.asset('assets/images/person.png', fit: BoxFit.cover);
+        //                         },
+        //                       ),
+        //                     ),
+        //                   ),
+        //                   const SizedBox(height: 5.0),
+        //                   Text(controller.name),
+        //                   Text(controller.email.toLowerCase()),
+        //                 ],
+        //               ),
+        //             ),
+        //             ListTile(
+        //               leading: const Icon(Icons.settings, color: Colors.red), // Change color here
+        //               title: const Text('Settings'),
+        //               onTap: () {
+        //                 // Navigate to settings page
+        //               },
+        //             ),
+        //             ListTile(
+        //               leading: const Icon(Icons.info, color: Colors.green),
+        //               title: const Text('About'),
+        //               onTap: () {
+        //                 // Navigate to about page
+        //               },
+        //             ),
+        //             Obx(() => ListTile(
+        //               leading: Get.find<ThemeController>().getTheme() ? Container(height: 32, width: 32, child: Image.asset('assets/images/moon.png')) : Container(height: 32, width: 32, child: Image.asset('assets/images/sun.png')), // Change color here
+        //               title: Get.find<ThemeController>().getTheme() ? Text("${Strings.nightmode.tr}") : Text("${Strings.lightmode.tr}"),
+        //               onTap: () {
+        //                 if(_scaffoldKey.currentState!.isDrawerOpen) {
+        //                   _scaffoldKey.currentState!.closeDrawer();
+        //                   Get.find<ThemeController>().toggleTheme();
+        //                 }
+        //               },
+        //             )),
+        //             ListTile(
+        //               leading: const Icon(Icons.menu, color: Colors.orange), // Change color here
+        //               title: const Text('Menu'),
+        //               onTap: () {
+        //                 // Implement menu functionality
+        //               },
+        //             ),
+        //           ],
+        //         ),
+        //       ),
+        //       Align(
+        //           alignment: Alignment.center,
+        //           child: Column(
+        //             children: [
+        //               InkWell(
+        //                 onTap: (){
+        //                   if(_scaffoldKey.currentState!.isDrawerOpen) {
+        //                     _scaffoldKey.currentState!.closeDrawer();
+        //                     Get.dialog(ConfirmDialog());
+        //                   }
+        //                 },
+        //                 child: Container(
+        //                   height: 45,
+        //                   color: AppColors.kAppBarColor,
+        //                   child: Row(
+        //                     mainAxisAlignment: MainAxisAlignment.center,
+        //                     children: [
+        //                       Icon(Icons.logout, color: Colors.white),
+        //                       SizedBox(width: 10),
+        //                       Text("${Strings.logout.tr}", style: TextStyle(fontSize: 16, color: Colors.white))
+        //                     ],
+        //                   ),
+        //                 ),
+        //               )
+        //             ],
+        //           )
+        //       ),
+        //     ],
+        //   ),
+        // ),
         floatingActionButton: FloatingActionButton(
             onPressed: () {
-              //Get.find<ThemeController>().toggleTheme();
+              Get.find<ThemeController>().toggleTheme();
             },
-            child: const Icon(Icons.add, color: Colors.white)),
+            child: const Icon(Icons.add, color: Colors.white)
+        ),
+        bottomNavigationBar: buildBottomNavigationBar(),
         body: Obx(() {
           switch (controller.state.value) {
             case UserState.loading:
@@ -303,5 +305,30 @@ class UserView extends GetView<UserController> {
         print('Selected: $value');
       }
     });
+  }
+
+  int _selectedIndex = 1;
+  BottomNavigationBar buildBottomNavigationBar() {
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      currentIndex: _selectedIndex,
+      onTap: (value) {
+        // setState(() {
+        //   _selectedIndex = value;
+        // });
+      },
+      items: const [
+        BottomNavigationBarItem(icon: Icon(Icons.messenger), label: "Chats"),
+        BottomNavigationBarItem(icon: Icon(Icons.people), label: "People"),
+        BottomNavigationBarItem(icon: Icon(Icons.call), label: "Calls"),
+        BottomNavigationBarItem(
+          icon: CircleAvatar(
+            radius: 14,
+            backgroundImage: AssetImage("assets/images/user.png"),
+          ),
+          label: "Profile",
+        ),
+      ],
+    );
   }
 }
